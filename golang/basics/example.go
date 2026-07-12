@@ -122,7 +122,7 @@ func main() {
 
 	fmt.Print("Enter your name: ")
 
-	userName, _ := reader.ReadString('\n')
+	userName, _ := reader.ReadString('\n') // ReadString reads until the first occurrence of delim ('\n' in this case) and returns a string containing the data up to and including the delimiter.
 
 	fmt.Println("Hello", userName)
 
