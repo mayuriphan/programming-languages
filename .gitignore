@@ -12,3 +12,6 @@ terraform.tfstate.d/
 *.tfplan-prod
 .terraform/environment
 crash.log
+*.dsa
+*.Blind-75-Complete-Resources-and-Code-Solutions/
+cmd.*
