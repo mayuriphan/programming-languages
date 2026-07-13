@@ -1,6 +1,6 @@
-In progress
+In progress:
 GO
 Postgres
 GIN
 REST client
-JWT
+JWT auth
