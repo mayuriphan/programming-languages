@@ -1,8 +1,10 @@
 POST http://localhost:8080/events
-Content-Type: application/json
+content-type: application/json
+# authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGV4YW1wbGVzLmNvbSIsImV4cCI6MTc4NDU4NTI4OCwidXNlcklkIjoxfQ.1FlKxTW0C6UMizfFsGT-pBppWMM67zSLpb9hQaOTJ6k
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIyQGV4YW1wbGVzLmNvbSIsImV4cCI6MTc4NDU4NjE3NywidXNlcklkIjoyfQ._t-FGliBtsCbGLxz7CQMhD9tnM9zW7movDiL2XWW-kg
 
 {
-  "Name": "My Event 102",
+  "Name": "My Event 2",
   "Description": "This is a test event",
   "Date": "2026-07-13T00:00:00Z",
   "Location": "Test Loc"

@@ -11,12 +11,12 @@ type Event struct {
 	Description string    `binding:"required"`
 	Location    string    `binding:"required"`
 	Date        time.Time `binding:"required"`
-	UserID      int
+	UserID      int64
 }
 
 var events []Event = []Event{}
 
-func (e Event) Save() error { // *Event an *e can be used too
+func (e *Event) Save() error { // *Event an *e can be used too
 	query := `
 	INSERT INTO events (name, description, location, date, user_id)
 	VALUES (?, ?, ?, ?, ?)` // ? is used to prevent SQL injection attacks
@@ -68,14 +68,14 @@ func GetEventByID(id int64) (*Event, error) {
 func (event Event) Update() error {
 	query := `
 	UPDATE events
-	SET name = ?, description = ?, location = ?, date = ?, user_id = ?
+	SET name = ?, description = ?, location = ?, date = ?
 	WHERE id = ?`
 	stmt, err := db.DB.Prepare(query)
 	if err != nil {
 		return err
 	}
 	defer stmt.Close()
-	_, err = stmt.Exec(event.Name, event.Description, event.Location, event.Date, event.UserID, event.ID)
+	_, err = stmt.Exec(event.Name, event.Description, event.Location, event.Date, event.ID)
 	return err
 }
 

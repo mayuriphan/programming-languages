@@ -36,13 +36,15 @@ func getEvents(context *gin.Context) { //param is send using context pointer
 }
 
 func createEvents(context *gin.Context) {
+
+	userId := context.GetInt64("userId")
 	var event models.Event                       //create a new event variable of type Event
 	err := context.Copy().ShouldBindJSON(&event) // act as scanner in fmt package
 	if err != nil {
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-
+	event.UserID = userId
 	err = event.Save() //call the function from models package to save the event
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -57,9 +59,14 @@ func updateEvent(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{"error": "Invalid event ID"})
 		return
 	}
-	_, err = models.GetEventByID(eventID)
+	userId := context.GetInt64("userId")
+	event, err := models.GetEventByID(eventID)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"error": "Event not found"})
+		return
+	}
+	if event.UserID != userId {
+		context.JSON(http.StatusUnauthorized, gin.H{"message": "Not authorized to update event!"})
 		return
 	}
 
@@ -71,6 +78,7 @@ func updateEvent(context *gin.Context) {
 	}
 
 	updatedEvent.ID = eventID
+	updatedEvent.UserID = event.UserID
 	err = updatedEvent.Update()
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
@@ -86,11 +94,18 @@ func deleteEvent(context *gin.Context) {
 		context.JSON(http.StatusBadRequest, gin.H{"error": "Invalid event ID"})
 		return
 	}
+
+	userId := context.GetInt64("userId")
 	event, err := models.GetEventByID(eventID)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"error": "Event not found"})
 		return
 	}
+	if event.UserID != userId {
+		context.JSON(http.StatusUnauthorized, gin.H{"message": "Not authorized to delete event!"})
+		return
+	}
+
 	err = event.Delete()
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"error": "Event not found"})
