@@ -14,8 +14,10 @@ func RegisterRoutes(server *gin.Engine) {
 	auth.Use(middlewares.Authenticate)
 	auth.POST("/events", createEvents) //POST request is used to create a new event
 	// server.POST("/events", middlewares.Authenticate, createEvents) //anoher way to add midldlware, left to right thus auth first then cretevent
+	auth.POST("/events/:id/register", registerForEvent)
 	auth.PUT("/events/:id", updateEvent)    //PUT request is used to update a specific event from the server
 	auth.DELETE("/events/:id", deleteEvent) //DELETE request is used to delete a specific event from the server
+	auth.DELETE("/events/:id/register", cancelRegistration)
 
 	server.POST("/signup", signup) //POST request is used to sign up a new user
 	server.POST("/login", login)

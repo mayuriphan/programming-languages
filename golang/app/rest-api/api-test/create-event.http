@@ -1,7 +1,7 @@
 POST http://localhost:8080/events
 content-type: application/json
 # authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGV4YW1wbGVzLmNvbSIsImV4cCI6MTc4NDU4NTI4OCwidXNlcklkIjoxfQ.1FlKxTW0C6UMizfFsGT-pBppWMM67zSLpb9hQaOTJ6k
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIyQGV4YW1wbGVzLmNvbSIsImV4cCI6MTc4NDU4NjE3NywidXNlcklkIjoyfQ._t-FGliBtsCbGLxz7CQMhD9tnM9zW7movDiL2XWW-kg
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGV4YW1wbGVzLmNvbSIsImV4cCI6MTc4NDYzODAxOSwidXNlcklkIjoxfQ.0YflFKxKr_n6ofI8HW7XlcabJZQW6coDF2qVHSIox8M
 
 {
   "Name": "My Event 2",
